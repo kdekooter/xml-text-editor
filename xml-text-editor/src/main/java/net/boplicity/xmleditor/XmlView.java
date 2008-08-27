@@ -35,11 +35,11 @@ import javax.swing.text.Utilities;
 
 /**
  * Thanks: http://groups.google.com/group/de.comp.lang.java/msg/2bbeb016abad270
- * 
+ *
  * IMPORTANT NOTE: regex should contain 1 group.
- * 
+ *
  * Using PlainView here because we don't want line wrapping to occur.
- * 
+ *
  * @author kees
  * @date 13-jan-2006
  *
@@ -51,24 +51,22 @@ public class XmlView extends PlainView {
     private static String TAG_END_PATTERN = "(/>)";
     private static String TAG_ATTRIBUTE_PATTERN = "\\s(\\w*)\\=";
     private static String TAG_ATTRIBUTE_VALUE = "[a-z\\-]*\\=(\"[^\"]*\")";
-    private static String TAG_COMMENT = "(<\\!--\\w*-->)";
-    private static String TAG_CDATA_START = "(\\<\\!\\[CDATA\\[)";
-    private static String TAG_CDATA_END = ".*(]]>)";
+    private static String TAG_COMMENT = "(<\\!--[\\w ]*-->)";
+    private static String TAG_CDATA = "(<\\!\\[CDATA\\[.*\\]\\]>)";
 
     static {
         // NOTE: the order is important!
         patternColors = new LinkedHashMap<Pattern, Color>();
-        patternColors.put(Pattern.compile(TAG_CDATA_START), new Color(128, 128, 128));
-        patternColors.put(Pattern.compile(TAG_CDATA_END), new Color(128, 128, 128));
         patternColors
                 .put(Pattern.compile(TAG_PATTERN), new Color(63, 127, 127));
+        patternColors.put(Pattern.compile(TAG_CDATA), Color.GRAY);
         patternColors.put(Pattern.compile(TAG_ATTRIBUTE_PATTERN), new Color(
                 127, 0, 127));
         patternColors.put(Pattern.compile(TAG_END_PATTERN), new Color(63, 127,
                 127));
         patternColors.put(Pattern.compile(TAG_ATTRIBUTE_VALUE), new Color(42,
                 0, 255));
-        patternColors.put(Pattern.compile(TAG_COMMENT), new Color(63, 95, 191));
+        patternColors.put(Pattern.compile(TAG_COMMENT), Color.BLUE);
     }
 
     public XmlView(Element element) {
@@ -103,7 +101,7 @@ public class XmlView extends PlainView {
         }
 
         // TODO: check the map for overlapping parts
-        
+
         int i = 0;
 
         // Colour the parts
