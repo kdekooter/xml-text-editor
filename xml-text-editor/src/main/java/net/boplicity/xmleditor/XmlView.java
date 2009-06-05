@@ -47,10 +47,11 @@ import javax.swing.text.Utilities;
 public class XmlView extends PlainView {
 
     private static HashMap<Pattern, Color> patternColors;
-    private static String TAG_PATTERN = "(</?[A-Za-z\\-_]*)\\s?>?";
+    private static String GENERIC_XML_NAME = "[A-Za-z\\-_]+(:[A-Za-z\\-_]+)?";
+    private static String TAG_PATTERN = "(</?" + GENERIC_XML_NAME + ")\\s?>?";
     private static String TAG_END_PATTERN = "(/>)";
-    private static String TAG_ATTRIBUTE_PATTERN = "\\s(\\w*)\\=";
-    private static String TAG_ATTRIBUTE_VALUE = "[a-z\\-]*\\=(\"[^\"]*\")";
+    private static String TAG_ATTRIBUTE_PATTERN = "(" + GENERIC_XML_NAME + ")\\w*\\=";
+    private static String TAG_ATTRIBUTE_VALUE = "\\w*\\=\\w*(\"[^\"]*\")";
     private static String TAG_COMMENT = "(<\\!--[\\w ]*-->)";
     private static String TAG_CDATA = "(<\\!\\[CDATA\\[.*\\]\\]>)";
 
